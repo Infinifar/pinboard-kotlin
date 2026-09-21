@@ -606,15 +606,7 @@ private fun RowScope.MenuItemsContent(
 
 object MainBottomAppBar {
 
-    /**
-     * Space that scrollable content must leave at the bottom so it is not covered by the bottom app
-     * bar, on top of whatever navigation bar inset already applies.
-     *
-     * Derived from the bar's own geometry: the 64.dp expanded min height of its
-     * `HorizontalFloatingToolbar`, plus the 16.dp offset it is drawn with, plus an 8.dp gap. Screens
-     * reaching for a bottom inset because of the bar should use this rather than a local literal.
-     */
-    val ContentClearance: Dp = 88.dp
+    val ContentClearance: Dp = 108.dp
 }
 
 // region Previews

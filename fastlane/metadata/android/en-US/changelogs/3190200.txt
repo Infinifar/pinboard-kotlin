@@ -1,0 +1,6 @@
+This version brings the following updates:
+
+* The description input is now automatically capitalized
+* The tag input is now brought into view more reliably when selected
+
+Thanks for using the app!

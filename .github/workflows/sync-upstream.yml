@@ -33,11 +33,12 @@ jobs:
       - name: Check for new upstream tags
         id: check_release
         run: |
-          LATEST_TAG=$(git tag --sort=-v:refname | grep -E '^v?[0-9]' | head -1 || echo "none")
+          # Only consider fork-owned -zh tags, read from the origin remote
+          LATEST_ZH_TAG=$(git ls-remote --tags origin 'refs/tags/*-zh' | awk '{print $2}' | sed 's|refs/tags/||' | sort -V | tail -1 || echo "none")
           UPSTREAM_LATEST_TAG=$(git ls-remote --tags --refs upstream 'refs/tags/*' | grep -v '\-zh' | sort -t/ -k3 -V | tail -1 | awk '{print $2}' | sed 's|refs/tags/||')
-          echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
+          echo "latest_zh_tag=$LATEST_ZH_TAG" >> $GITHUB_OUTPUT
           echo "upstream_tag=$UPSTREAM_LATEST_TAG" >> $GITHUB_OUTPUT
-          echo "Current latest: $LATEST_TAG, Upstream latest: $UPSTREAM_LATEST_TAG"
+          echo "Current latest zh tag: $LATEST_ZH_TAG, Upstream latest: $UPSTREAM_LATEST_TAG"
 
       - name: Merge upstream main
         id: merge
@@ -74,7 +75,7 @@ jobs:
           git push origin main
 
       - name: Create tag for upstream release
-        if: steps.merge.outputs.merged == 'true' && steps.check_release.outputs.upstream_tag != '' && steps.check_release.outputs.upstream_tag != steps.check_release.outputs.latest_tag
+        if: steps.merge.outputs.merged == 'true' && steps.check_release.outputs.upstream_tag != '' && format('{0}-zh', steps.check_release.outputs.upstream_tag) != steps.check_release.outputs.latest_zh_tag
         run: |
           git tag "${{ steps.check_release.outputs.upstream_tag }}-zh"
           git push origin "${{ steps.check_release.outputs.upstream_tag }}-zh"

@@ -1,6 +1,6 @@
 [versions]
 agp = "9.4.1"
-composeMaterial3 = "1.5.0-alpha28"
+composeMaterial3 = "1.5.0-alpha29"
 composeRuntime = "1.13.0-alpha03"
 composeUi = "1.13.0-alpha02"
 coroutines = "1.11.0"
@@ -13,7 +13,7 @@ lifecycle = "2.11.0"
 okhttp = "5.5.0"
 room = "2.8.5"
 coil = "3.6.3"
-spotless = "8.10.2"
+spotless = "8.10.3"
 aboutLibraries = "15.2.0"
 
 [libraries]
@@ -35,7 +35,7 @@ coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", ve
 coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 
 appcompat = { module = "androidx.appcompat:appcompat", version = "1.8.0" }
-core = { module = "androidx.core:core", version = "1.19.0" }
+core = { module = "androidx.core:core", version = "1.19.1" }
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 adaptive-android = { module = "androidx.compose.material3.adaptive:adaptive-android", version = "1.3.0" }
 material = { module = "com.google.android.material:material", version = "1.14.0" }
@@ -44,9 +44,9 @@ lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime", version.r
 lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
-work-runtime = { module = "androidx.work:work-runtime", version = "2.11.2" }
+work-runtime = { module = "androidx.work:work-runtime", version = "2.12.0" }
 browser = { module = "androidx.browser:browser", version = "1.10.0" }
-webkit = { module = "androidx.webkit:webkit", version = "1.17.0" }
+webkit = { module = "androidx.webkit:webkit", version = "1.17.1" }
 
 compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "composeRuntime" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" }

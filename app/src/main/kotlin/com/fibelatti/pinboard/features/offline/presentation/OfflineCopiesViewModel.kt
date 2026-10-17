@@ -1,5 +1,6 @@
 package com.fibelatti.pinboard.features.offline.presentation
 
+import com.fibelatti.pinboard.core.AppMode
 import com.fibelatti.pinboard.core.android.base.BaseViewModel
 import com.fibelatti.pinboard.core.di.AppDispatchers
 import com.fibelatti.pinboard.core.di.Scope
@@ -13,7 +14,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.File
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -24,7 +24,6 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class OfflineCopiesViewModel @Inject constructor(
     @Scope(AppDispatchers.DEFAULT) dispatcher: CoroutineDispatcher,
@@ -60,10 +59,10 @@ class OfflineCopiesViewModel @Inject constructor(
 
     fun delete(offlineCopies: List<OfflineCopy>) {
         scope.launch {
-            for (offlineCopy in offlineCopies) {
+            for ((bookmarkId: String, appMode: AppMode) in offlineCopies) {
                 offlineCopyRepository.delete(
-                    appMode = offlineCopy.appMode,
-                    bookmarkId = offlineCopy.bookmarkId,
+                    appMode = appMode,
+                    bookmarkId = bookmarkId,
                 )
             }
             _screenState.update { it.copy(deletedCount = offlineCopies.size) }
